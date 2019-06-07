@@ -1,0 +1,232 @@
+{
+	"info": {
+		"_postman_id": "d802dc7e-2064-480c-b36c-d4f247475fba",
+		"name": "ROMERO",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "API_NovaMensagem",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d6f4f235-0204-47b3-bd55-4bef76d9d913",
+								"exec": [
+									"var data = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"idMensagem\", data.id);",
+									"tests[\"Validação de sucesso de postagem no facebook\"] = data.id !== null;",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://graph.facebook.com/315227746045708/feed?message=Post&access_token={{token}}",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"facebook",
+								"com"
+							],
+							"path": [
+								"315227746045708",
+								"feed"
+							],
+							"query": [
+								{
+									"key": "message",
+									"value": "Post"
+								},
+								{
+									"key": "access_token",
+									"value": "{{token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "API_AlterandoMensagem",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0ad2ca03-e0d9-4045-b674-fa36499916a2",
+								"exec": [
+									"var data = JSON.parse(responseBody);",
+									"tests[\"validando retorno do update da mensagem\"] = data.success === true"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://graph.facebook.com/{{idMensagem}}?message=Alreração do Post&access_token={{token}}",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"facebook",
+								"com"
+							],
+							"path": [
+								"{{idMensagem}}"
+							],
+							"query": [
+								{
+									"key": "message",
+									"value": "Alreração do Post"
+								},
+								{
+									"key": "access_token",
+									"value": "{{token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "API_ErroNaPostagemDaMensagem",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d6f4f235-0204-47b3-bd55-4bef76d9d913",
+								"exec": [
+									"var data = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"idMensagem\", data.id);",
+									"tests[\"Validação de sucesso de postagem no facebook\"] = data.id !== null;",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://graph.facebook.com/315227746045708/feed?message=Post&access_token={{token}}",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"facebook",
+								"com"
+							],
+							"path": [
+								"315227746045708",
+								"feed"
+							],
+							"query": [
+								{
+									"key": "message",
+									"value": "Post"
+								},
+								{
+									"key": "access_token",
+									"value": "{{token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "API_ErroNaAlteracaoDaMensagem",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0ad2ca03-e0d9-4045-b674-fa36499916a2",
+								"exec": [
+									"var data = JSON.parse(responseBody);",
+									"tests[\"validando erro na alteração da mensagem\"] = data.error !== null"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "d28d236d-0c54-4081-ab23-a1dfaeb80b15",
+								"exec": [
+									"postman.setEnvironmentVariable(\"idMensagem\", null);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://graph.facebook.com/{{idMensagem}}?message=Alreração do Post&access_token={{token}}",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"facebook",
+								"com"
+							],
+							"path": [
+								"{{idMensagem}}"
+							],
+							"query": [
+								{
+									"key": "message",
+									"value": "Alreração do Post"
+								},
+								{
+									"key": "access_token",
+									"value": "{{token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "386ad089-465e-450d-815b-52a9df1d04bc",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "362c16fd-b0a1-4304-b65b-dcf24f59e40a",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	]
+}
